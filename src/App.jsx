@@ -1,35 +1,92 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+const problems1 = [
+  {
+    title: "201. Bitwise AND of Numbers Range",
+    difficulty: "Medium",
+    acceptanceRate: "42%",
+  },
+  {
+    title: "202. Bitwise AND of Numbers Range",
+    difficulty: "Hard",
+    acceptanceRate: "42%",
+  },
+  {
+    title: "203. Bitwise AND of Numbers Range",
+    difficulty: "Medium",
+    acceptanceRate: "42%",
+  },
+  {
+    title: "204 . Bitwise AND of Numbers Range",
+    difficulty: "Medium",
+    acceptanceRate: "42%",
+  },
+];
+const problems2 = [
+  {
+    title: "Title1",
+    difficulty: "Medium",
+    acceptanceRate: "42%",
+  },
+  {
+    title: "Title2",
+    difficulty: "Medium",
+    acceptanceRate: "65%",
+  },
+  {
+    title: "203. Bitwise AND of Numbers Range",
+    difficulty: "Hard",
+    acceptanceRate: "42%",
+  },
+  {
+    title: "204 . Bitwise AND of Numbers Range",
+    difficulty: "Medium",
+    acceptanceRate: "42%",
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [problems, setProblems] = useState([]);
 
   return (
-    <>
+    <div>
+      <input type="text" placeholder="email"></input>
+      <input type="text" placeholder="password"></input>
+      <button>Sign In</button>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <button id="page1" onClick={() => {
+          setProblems(problems => problems1)
+        }}>Page 1</button>
+        <button id="page2" onClick={() => {
+          setProblems(problems => problems2)
+        }}>Page 2</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div>
+        {problems.map(problem => <ProblemStatement
+          title={problem.title}
+          difficulty={problem.difficulty}
+          acceptanceRate={problem.acceptanceRate}
+        />)}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div >
   )
+}
+
+function ProblemStatement(props) {
+  const title = props.title;
+  const difficulty = props.difficulty;
+  const acceptanceRate = props.acceptanceRate;
+
+
+  return (
+    <tr>
+      <td>{title}</td>
+      <td style={{ color: difficulty === "Medium" ? "yellow" : "red" }}>
+        {difficulty}
+      </td>
+      <td>
+        {acceptanceRate}
+      </td>
+    </tr>)
 }
 
 export default App
