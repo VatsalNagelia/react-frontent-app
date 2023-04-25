@@ -16,6 +16,12 @@ import {
   Th,
   Td,
 } from '@chakra-ui/react';
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import ProblemPage from "./pages/ProblemPage";
+import Home from "./pages/Home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 const problems1 = [
   {
     title: "201. Bitwise AND of Numbers Range",
@@ -65,71 +71,80 @@ function App() {
   const [problems, setProblems] = useState([]);
 
   return (
-    <ChakraProvider>
-      <Box minW="100vw" minH="100vh" p={4} bgColor="gray.100">
-        <Heading mb={6} textAlign="center" fontSize={["2xl", "3xl", "4xl"]}>
-          Problem Solving Platform
-        </Heading>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+          <ChakraProvider>
+            <Box minW="100vw" minH="100vh" p={4} bgColor="gray.100">
+              <Heading mb={6} textAlign="center" fontSize={["2xl", "3xl", "4xl"]}>
+                Problem Solving Platform
+              </Heading>
 
-        <VStack
-          align="center"
-          spacing={6}
-          maxW="lg"
-          mx="auto"
-          p={6}
-          bgColor="white"
-          borderRadius="md"
-          boxShadow="lg"
-        >
-          <HStack w="100%">
-            <FormControl>
-              <Input placeholder="Email" type="email" />
-            </FormControl>
-            <FormControl>
-              <Input placeholder="Password" type="password" />
-            </FormControl>
-            <Button colorScheme="blue">Sign In</Button>
-          </HStack>
-          <HStack spacing={4}>
-            <Button
-              colorScheme="teal"
-              onClick={() => {
-                setProblems(() => problems1);
-              }}
-            >
-              Page 1
-            </Button>
-            <Button
-              colorScheme="teal"
-              onClick={() => {
-                setProblems(() => problems2);
-              }}
-            >
-              Page 2
-            </Button>
-          </HStack>
-          <Table variant="striped" colorScheme="teal">
-            <Thead>
-              <Tr>
-                <Th>Title</Th>
-                <Th>Difficulty</Th>
-                <Th>Acceptance Rate</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {problems.map((problem, index) => (
-                <ProblemStatement
-                  key={index}
-                  title={problem.title}
-                  difficulty={problem.difficulty}
-                  acceptanceRate={problem.acceptanceRate}
-                />
-              ))}
-            </Tbody>
-          </Table>
-        </VStack>
-      </Box>
-    </ChakraProvider>
+              <VStack
+                align="center"
+                spacing={6}
+                maxW="lg"
+                mx="auto"
+                p={6}
+                bgColor="white"
+                borderRadius="md"
+                boxShadow="lg"
+              >
+                <HStack w="100%">
+                  <FormControl>
+                    <Input placeholder="Email" type="email" />
+                  </FormControl>
+                  <FormControl>
+                    <Input placeholder="Password" type="password" />
+                  </FormControl>
+                  <Button colorScheme="blue">Sign In</Button>
+                  <Button colorScheme="blue">Sign Up</Button>
+                </HStack>
+                <HStack spacing={4}>
+                  <Button
+                    colorScheme="teal"
+                    onClick={() => {
+                      setProblems(() => problems1);
+                    }}
+                  >
+                    Page 1
+                  </Button>
+                  <Button
+                    colorScheme="teal"
+                    onClick={() => {
+                      setProblems(() => problems2);
+                    }}
+                  >
+                    Page 2
+                  </Button>
+                </HStack>
+                <Table variant="striped" colorScheme="teal">
+                  <Thead>
+                    <Tr>
+                      <Th>Title</Th>
+                      <Th>Difficulty</Th>
+                      <Th>Acceptance Rate</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {problems.map((problem, index) => (
+                      <ProblemStatement
+                        key={index}
+                        title={problem.title}
+                        difficulty={problem.difficulty}
+                        acceptanceRate={problem.acceptanceRate}
+                      />
+                    ))}
+                  </Tbody>
+                </Table>
+              </VStack>
+            </Box>
+          </ChakraProvider >} />
+        <Route path="signin" element={<SignIn />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="home" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
